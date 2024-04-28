@@ -12,7 +12,7 @@ export class AuthService {
         return this.isAuthenticated$.getValue();
     }
 
-    login(): void {
+    login(_email: string, _pass: string): void {
         storage.setItem('appSession', { user: 'some-user-id', token: 'abc' });
         this.isAuthenticated$.next(true);
     }

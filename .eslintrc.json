@@ -17,6 +17,7 @@
         "tsconfigRootDir": "./"
       },
       "rules": {
+        "prettier/prettier": "warn",
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -34,8 +35,15 @@
           }
         ],
         "@typescript-eslint/no-floating-promises": "off",
-        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "varsIgnorePattern": "^_",
+            "argsIgnorePattern": "^_"
+          }
+        ],
         "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/naming-convention": [
           "error",
