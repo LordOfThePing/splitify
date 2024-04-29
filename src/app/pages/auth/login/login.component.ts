@@ -16,16 +16,19 @@ export class LoginComponent {
     private readonly _authService = inject(AuthService);
     private _email: string | undefined;
     private _password: string | undefined;
-    login(): void {
+    async login(): Promise<void> {
         this._email = document.getElementById('email')?.nodeValue as string;
         this._password = document.getElementById('password')?.nodeValue as string;
-        console.log(this._email);
-        console.log(this._password);
-        if (this._email === undefined || this._password === undefined) {
-            this._router.navigate([this.returnUrl ?? `/auth/login`]);
+        if (!this._authService.login(this._email, this._password)) {
+            var formElement = <HTMLElement>document.getElementById('loginerrordiv');
+            var pElement = <HTMLElement>document.getElementById('errorMessage');
+            if (formElement != null) {
+                formElement.className = formElement.className.replace(" hidden", "");
+                pElement.replaceChildren("Incorrect password or username"); 
+            }
+        } else {
+            console.log("login");
+            this._router.navigate([this.returnUrl ?? `/`]);
         }
-        this._authService.login(this._email, this._password);
-
-        this._router.navigate([this.returnUrl ?? `/`]);
     }
 }

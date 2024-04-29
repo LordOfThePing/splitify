@@ -14,3 +14,13 @@ export type StorageObjectData<T extends StorageObjectType> = {
     type: T;
     data: StorageObjectMap[T];
 };
+
+type StorageUsersMap = {
+    [user: string]: {
+        pass: string, 
+        token: string
+    }
+};
+export type StorageUserData = {
+    data: StorageUsersMap[string];
+};
