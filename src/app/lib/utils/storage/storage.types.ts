@@ -18,7 +18,9 @@ export type StorageObjectData<T extends StorageObjectType> = {
 type StorageUsersMap = {
     [user: string]: {
         pass: string, 
-        token: string
+        token: string, 
+        first_name: string, 
+        last_name: string 
     }
 };
 export type StorageUserData = {

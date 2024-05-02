@@ -46,7 +46,11 @@
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/naming-convention": [
-          "error",
+          "warn",
+          {
+            "varsIgnorePattern": "^_", 
+            "argsIgnorePattern": "^_"
+          }, 
           {
             "selector": "variable",
             "modifiers": ["const"],

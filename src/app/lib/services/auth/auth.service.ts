@@ -12,19 +12,26 @@ export class AuthService {
         return this.isAuthenticated$.getValue();
     }
 
-    login(_email: string, _pass: string): boolean {
-        var data = userStorage.getUser(_email); 
+    login(email: string, pass: string): [boolean, string] {
+        var data = userStorage.getUser(email); 
         if (data === null){
             this.isAuthenticated$.next(false);
-            return false; 
-        } else if (data.pass == _pass){
+            return [false, 'That username does not exist']; 
+        } else if (data.pass == pass){
             this.isAuthenticated$.next(true);
-            return true; 
+            return [true, "OK"]; 
         } else {
             this.isAuthenticated$.next(false);
-            return false; 
+            return [false, "Incorrect password"]; 
         }
-        //    , { pass: _pass, token: _email + _pass + "token" });
+    }
+
+    register(email: string, pass: string, firstName: string, lastName: string): boolean {
+
+        if (userStorage.getUser(email) != null) {return false;}; 
+
+        userStorage.setUser(email, {pass, token: "abc", first_name: firstName, last_name: lastName}); 
+        return true; 
     }
 
     logout(): void {

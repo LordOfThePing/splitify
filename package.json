@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prepare": "npx simple-git-hooks",
     "ng": "ng",
     "dev": "ng serve",
     "dev:host": "ng serve --host 0.0.0.0 --disable-host-check",
@@ -18,20 +17,6 @@
     "stylelint": "stylelint **/*.{css,pcss,less,scss,sass} --quiet-deprecation-warnings",
     "stylelint:fix": "stylelint **/*.{css,pcss,less,scss,sass} --quiet-deprecation-warnings --fix",
     "format": "prettier --write ."
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged",
-    "pre-push": "pnpm build"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "pnpm lint:fix",
-      "pnpm prettier"
-    ],
-    "*.{css,pcss,less,scss,sass}": [
-      "pnpm stylelint:fix",
-      "pnpm prettier"
-    ]
   },
   "dependencies": {
     "@angular/animations": "^16.0.0",

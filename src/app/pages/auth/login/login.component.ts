@@ -16,18 +16,21 @@ export class LoginComponent {
     private readonly _authService = inject(AuthService);
     private _email: string | undefined;
     private _password: string | undefined;
-    async login(): Promise<void> {
-        this._email = document.getElementById('email')?.nodeValue as string;
-        this._password = document.getElementById('password')?.nodeValue as string;
-        if (!this._authService.login(this._email, this._password)) {
-            var formElement = <HTMLElement>document.getElementById('loginerrordiv');
-            var pElement = <HTMLElement>document.getElementById('errorMessage');
+    login(): void {
+        this._email = (document.getElementById('email') as HTMLInputElement).value;
+        this._password = (document.getElementById('password') as HTMLInputElement).value;
+        console.log(this._email, this._password);
+        const [loginOk, errorString] = this._authService.login(this._email, this._password); 
+        if (!loginOk) {
+            console.log("not logged"); 
+            const formElement = <HTMLElement>document.getElementById('loginerrordiv');
+            const pElement = <HTMLElement>document.getElementById('errorMessage');
             if (formElement != null) {
-                formElement.className = formElement.className.replace(" hidden", "");
-                pElement.replaceChildren("Incorrect password or username"); 
+                formElement.className = formElement.className.replace(' hidden', '');
+                pElement.replaceChildren('Incorrect password or username');
             }
         } else {
-            console.log("login");
+            console.log('logged');
             this._router.navigate([this.returnUrl ?? `/`]);
         }
     }
